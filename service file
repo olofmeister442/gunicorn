@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=root
+Group=nginx
+WorkingDirectory=/home/ec2-user/chatbot
+ExecStart=/bin/gunicorn --workers 3 --bind unix:/home/ec2-user/chatbot/chatbot.sock chatbot.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
